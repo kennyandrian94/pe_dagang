@@ -135,4 +135,9 @@ class CustomerController extends Controller
                 ->addIndexColumn()
                 ->make();
     }
+
+    public function select2(Request $request)
+    {
+        return Customer::where('name','LIKE','%' . request('q') . '%')->Orwhere('nickname','LIKE','%' . request('q') . '%')->orderBy('name')->paginate(10);
+    }
 }

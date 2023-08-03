@@ -33,6 +33,7 @@ Route::name('admin.')->group( function() {
 			'users' => 'Back\UserController',
 			'customers' => 'Back\CustomerController',
 			'products' => 'Back\ProductController',
+			'orders' => 'Back\OrderController',
 	 	],[
 	 		'except' => 'show',
         ]);
@@ -48,11 +49,14 @@ Route::name('admin.')->group( function() {
 	 		Route::get('users', 'Back\UserController@datatable')->name('users');
 	 		Route::get('customers', 'Back\CustomerController@datatable')->name('customers');
 	 		Route::get('products', 'Back\ProductController@datatable')->name('products');
+	 		Route::get('orders', 'Back\OrderController@datatable')->name('orders');
+	 		//
 	 		Route::get('products/stock/{id}', 'Back\ProductController@datatableStock')->name('products.stock');
 	 	});
 
 	 	Route::prefix('select2')->name('select2.')->group(function() {
-	 		// Route::get('projects', 'Back\ProjectController@select2')->name('projects');
+	 		Route::get('customers', 'Back\CustomerController@select2')->name('customers');
+	 		Route::get('products', 'Back\ProductController@select2')->name('products');
 	 	});
 	});
 });

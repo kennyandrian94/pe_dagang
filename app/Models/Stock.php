@@ -13,4 +13,9 @@ class Stock extends Model
     {
         return $this->belongsTo('App\Models\Product', 'product_id');
     }
+
+    public function order()
+    {
+        return $this->hasMany('App\Models\Order', 'stock_id');
+    }
 }

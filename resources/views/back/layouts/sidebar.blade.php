@@ -32,6 +32,12 @@
                     <span class="site-menu-title">Product</span>
                 </a>
             </li>
+            <li class="site-menu-item @if(Request::is('admin/orders*')) active @endif">
+                <a href="{{ route('admin.orders.index') }}">
+                    <i class="site-menu-icon fa-shopping-bag" aria-hidden="true"></i>
+                    <span class="site-menu-title">Order</span>
+                </a>
+            </li>
         </ul>
     </div>
 </div>

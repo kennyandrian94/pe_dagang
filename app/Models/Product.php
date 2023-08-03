@@ -13,4 +13,15 @@ class Product extends Model
     {
         return $this->hasMany('App\Models\Stock', 'product_id');
     }
+
+    public function order()
+    {
+        return $this->hasMany('App\Models\Order', 'product_id');
+    }
+
+    public function format_harga()
+    {
+        $hasil_rupiah = "Rp " . number_format($this->harga,2,',','.');
+        return $hasil_rupiah;
+    }
 }

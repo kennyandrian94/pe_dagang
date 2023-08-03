@@ -142,8 +142,16 @@ class ProductController extends Controller
                     }
                     return $q;
                 })
+                ->editColumn('harga', function($data) {
+                    return $data->format_harga();
+                })
                 ->addIndexColumn()
                 ->make();
+    }
+
+    public function select2(Request $request)
+    {
+        return Product::where('name','LIKE','%' . request('q') . '%')->orderBy('name')->paginate(10);
     }
 
     /**
@@ -198,7 +206,7 @@ class ProductController extends Controller
 
         return DataTables::of($stock)
                 ->editColumn('created_at', function($data) {
-                    return Carbon::parse($data->created_at)->format('d M Y h:i:s');
+                    return Carbon::parse($data->created_at)->format('d-M-Y h:i:s');
                 })
                 ->addIndexColumn()
                 ->make();
