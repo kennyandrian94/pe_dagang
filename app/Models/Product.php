@@ -19,6 +19,11 @@ class Product extends Model
         return $this->hasMany('App\Models\Order', 'product_id');
     }
 
+    public function scopeActive($query)
+    {
+        return $query->where('status', 'active');
+    }
+
     public function format_harga()
     {
         $hasil_rupiah = "Rp " . number_format($this->harga,2,',','.');

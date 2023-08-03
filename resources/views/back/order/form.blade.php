@@ -53,10 +53,17 @@
                                     {{ Form::label('customer_id', 'Customer', ['class' => 'form-control-label']) }}
                                     {!! Form::select('customer_id', $customer_array, $customer_select, ['autocomplete' => 'off', 'class' => 'form-control', 'id' => 'customer_id']) !!}
                                 </div>
-                                <div class="form-group">
-                                    {{ Form::label('quantity', 'Quantity', ['class' => 'form-control-label']) }}
-                                    {{ Form::text('quantity', $order->quantity, ['autocomplete' => 'off', 'class' => 'form-control']) }}
-                                </div>
+                                @if($route == 'admin.orders.store')
+                                    <div class="form-group">
+                                        {{ Form::label('quantity', 'Quantity', ['class' => 'form-control-label']) }}
+                                        {{ Form::text('quantity', $order->quantity, ['autocomplete' => 'off', 'class' => 'form-control']) }}
+                                    </div>
+                                @else
+                                    <div class="form-group">
+                                        {{ Form::label('quantity', 'Quantity', ['class' => 'form-control-label']) }}
+                                        {{ Form::text('quantity', $order->quantity, ['autocomplete' => 'off', 'class' => 'form-control', 'readonly']) }}
+                                    </div>
+                                @endif
                                 <div class="form-group">
                                     {{ Form::label('status', 'Status', ['class' => 'form-control-label']) }}
                                     {{ Form::select('status', ['belum_lunas' => 'Belum Lunas', 'lunas' => 'Lunas'], $order->status, ['autocomplete' => 'off', 'class' => 'form-control']) }}
@@ -133,6 +140,11 @@ function select2Ajax(placeholder, url) {
 @if(session('message'))
     <script>
         toastr["success"]("{{ session('message') }}", "Success");
+    </script>
+@endif
+@if(session('danger'))
+    <script>
+        toastr["error"]("{{ session('danger') }}", "Error");
     </script>
 @endif
 @stop

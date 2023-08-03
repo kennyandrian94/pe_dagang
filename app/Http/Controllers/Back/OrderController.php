@@ -60,6 +60,16 @@ class OrderController extends Controller
             ]
         );
 
+        $check = Stock::where('product_id', $request->product_id)->get();
+        $c = 0;
+        foreach($check as $data) {
+            $c = $c + $data->quantity;
+        }
+
+        if($c < $request->quantity) {
+            return redirect()->route('admin.orders.create')->with('danger', 'Stock Kurang!'); 
+        }
+
         $order = new Order;
         $order->product_id = $request->product_id;
         $order->customer_id = $request->customer_id;
@@ -75,8 +85,8 @@ class OrderController extends Controller
         $order->stock_id = $stock->id;
         $order->save();
 
-        return redirect()->route('admin.orders.edit', $order->id)->with('message', 'Order Saved!');
-        // return redirect()->route('admin.orders.index')->with('message', 'Order Saved!');
+        // return redirect()->route('admin.orders.edit', $order->id)->with('message', 'Order Saved!');
+        return redirect()->route('admin.orders.index')->with('message', 'Order Saved!');
     }
 
     /**

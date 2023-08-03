@@ -151,7 +151,7 @@ class ProductController extends Controller
 
     public function select2(Request $request)
     {
-        return Product::where('name','LIKE','%' . request('q') . '%')->orderBy('name')->paginate(10);
+        return Product::active()->where('name','LIKE','%' . request('q') . '%')->orderBy('name')->paginate(10);
     }
 
     /**
